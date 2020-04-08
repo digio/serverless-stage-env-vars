@@ -1,0 +1,90 @@
+{
+  "processedInput": {
+    "commands": [
+      "print"
+    ],
+    "options": {
+      "s": "pre-prod",
+      "c": "slsConfig.js",
+      "config": "slsConfig.js",
+      "format": "json",
+      "stage": "pre-prod"
+    }
+  },
+  "service": {
+    "provider": {
+      "stage": "${opt:stage, \"dev\"}",
+      "variableSyntax": null,
+      "name": "aws",
+      "runtime": "nodejs12.x",
+      "region": "ap-southeast-2",
+      "versionFunctions": true,
+      "cfLogs": true,
+      "timeout": 28,
+      "memorySize": 128,
+      "tracing": {
+        "apiGateway": "${self:custom.env.TRACING_ENABLED}",
+        "lambda": "${self:custom.env.TRACING_ENABLED}"
+      },
+      "environment": {
+        "STAGE": "${opt:stage, self:provider.stage}",
+        "REGION": "${opt:region, self:provider.region}",
+        "SERVICE_INSTANCE_NAME": "${self:provider.stage}-${self:service}",
+        "CUSTOM_DOMAIN_ENABLED": "${self:custom.customDomain.enabled}",
+        "BUSINESS_CATEGORY": "${self:service}",
+        "XRAY_ENABLED": "${self:custom.env.TRACING_ENABLED}"
+      },
+      "tags": {
+        "BUSINESS_CATEGORY": "${self:service}",
+        "SYSTEM_NAME": "${self:custom.env.SYSTEM_NAME}",
+        "SERVICE_NAME": "${self:service}"
+      },
+      "deploymentBucket": "${self:custom.env.SYSTEM_NAME}-serverless-deployment-${file(../common/config/sls/baseServerless.js):getDynamicValue.AWS_ENV_NAME}",
+      "iamRoleStatements": [
+        {
+          "Action": [
+            {}
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+        }
+      ],
+      "deploymentBucketObject": {
+        "name": "${self:custom.env.SYSTEM_NAME}-serverless-deployment-${file(../common/config/sls/baseServerless.js):getDynamicValue.AWS_ENV_NAME}",
+        "serverSideEncryption": "aws:kms"
+      },
+      "remoteFunctionData": null
+    },
+    "custom": {
+      "env": {
+        "AWS_ACCOUNT_ID": "${stageEnv:AWS_ACCOUNT_ID}",
+        "TRACING_ENABLED": "${stageEnv:TRACING_ENABLED}",
+        "webBucketName": "${stageEnv:WEB_DOMAIN}"
+      },
+      "customDomain": {
+        "stage": "${self:provider.stage}",
+        "certificateName": "${stageEnv:CERTIFICATE_COMMON_NAME}",
+        "createRoute53Record": true,
+        "endpointType": "regional",
+        "enabled": "true"
+      },
+      "deploymentSettings": {
+        "stages": [
+          "prod"
+        ],
+        "type": "Canary10Percent5Minutes",
+        "alias": "active"
+      },
+      "stageEnvVars": {
+        "defaultEnv": "dev",
+        "environmentFile": "./fixtures/environment.config.js"
+      },
+      "s3Sync": [
+        {
+          "bucketName": "${self:custom.env.webBucketName}",
+          "localDir": "public/"
+        }
+      ]
+    }
+  }
+}

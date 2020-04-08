@@ -1,0 +1,52 @@
+{
+  "name": "serverless-stage-env-vars",
+  "version": "0.0.0-development",
+  "description": "Serverless plugin for reading stage-specific environment variables from a config file",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digio/serverless-stage-env-vars.git"
+  },
+  "homepage": "https://github.com/digio/serverless-stage-env-vars#readme",
+  "bugs": {
+    "url": "https://github.com/digio/serverless-stage-env-vars/issues"
+  },
+  "keywords": [
+    "serverless",
+    "plugin",
+    "env",
+    "environment"
+  ],
+  "author": "DigIO",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint --max-warnings=0 --fix src/",
+    "verify": "eslint --max-warnings=0 src/",
+    "test": "npm-run-all test:report",
+    "test:unit": "jest",
+    "test:report": "jest --no-cache --coverage --json --outputFile=test-reports/unit/unit.json",
+    "test:reportlist": "jest --no-cache --coverage",
+    "test:snaps": "jest -u",
+    "test:watch": "jest --watchAll",
+    "upload-coverage": "cat test-reports/coverage/lcov.info | coveralls"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "coveralls": "3.0.11",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-unicorn": "17.2.0",
+    "jest": "25.1.0",
+    "prettier": "1.19.1",
+    "npm-run-all": "4.1.5"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=8.10",
+    "npm": ">=6.9"
+  }
+}
