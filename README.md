@@ -4,7 +4,6 @@
 [![npm package][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
-[![Dependencies Status][david-image]][david-url]
 [![Downloads][downloads-image]][npm-url]
 
 A Serverless plugin to easily use stage-specific environment variables.
@@ -85,8 +84,6 @@ The plugin will replace those variables with the stage-specific values from your
 [npm-url]: http://npmjs.org/package/serverless-stage-env-vars
 [travis-image]: https://travis-ci.org/digio/serverless-stage-env-vars.svg?branch=master
 [travis-url]: https://travis-ci.org/digio/serverless-stage-env-vars
-[david-image]: https://david-dm.org/digio/serverless-stage-env-vars/status.svg
-[david-url]: https://david-dm.org/digio/serverless-stage-env-vars
 [coveralls-image]: https://coveralls.io/repos/github/digio/serverless-stage-env-vars/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/digio/serverless-stage-env-vars?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/serverless-stage-env-vars.svg
