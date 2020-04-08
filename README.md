@@ -25,10 +25,14 @@ plugins:
 
 ## Usage
 
-Define a `custom.stageEnvVars` object inside your Serverless config, and specify the default environment and a path the environment configuration file.
+Inside your Serverless config, include this plugin and define a `custom.stageEnvVars` object and specify the default environment and a path the environment configuration file.
 **This configuration is required.**
 
 ```yaml
+plugins:
+  - serverless-stage-env-vars
+  ...
+
 custom:
   stageEnvVars:
     defaultEnv: dev # The name of the stage config to use if no matching stage is found
