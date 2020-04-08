@@ -21,7 +21,7 @@ plugins:
   - serverless-stage-env-vars
 ```
 
-**Note**: Node 8.x or higher runtime required.
+**Note**: Node 10.x or higher runtime required.
 
 ## Usage
 
@@ -44,7 +44,7 @@ const BASE_DOMAIN_NAME = 'foo.digio.com.au';
 
 const devConfig = {
   AWS_ACCOUNT_ID: 'devAccountId',
-  WEB_DOMAIN: `plugin.${BASE_DOMAIN_NAME}`, // BU: This will be dynamic based on the slice name, won't it?
+  WEB_DOMAIN: `plugin.${BASE_DOMAIN_NAME}`,
   CERTIFICATE_COMMON_NAME: `*.${BASE_DOMAIN_NAME}`,
   TRACING_ENABLED: false,
 };
@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-Finally, you can refer to stage environment variables in your Servlerless config file using the `${stageEnv:VARIABLE_name}` syntax:
+Finally, you can refer to stage environment variables in your Servlerless config file using the `${stageEnv:VARIABLE_NAME}` syntax:
 
 ```yaml
 provider:
